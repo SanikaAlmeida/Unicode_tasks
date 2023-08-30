@@ -2,19 +2,19 @@ const express = require('express');
 const fetch = require('node-fetch');
 const app = express();
 
-app.use(express.json()); 
+app.use(express.json()); //middleware to parse json data
 
-app.post('/flashcard', function(req, res) {
-    const word = req.body.word;
+app.post('/flashcard', function(req, res) {   //endpoint to implement post request
+    const word = req.body.word;        //obtain the word entered in the user body
     
-    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)   //fetch the data
     .then(response => response.json())
     .then(data => {
-        res.json(data);
+        res.json(data);             //send json response
     })
     .catch(error => {
         console.log('Error fetching data:', error);
-        res.send("Error while fetching data");
+        res.status(500).send("Error while fetching data");
     });
 });
 
