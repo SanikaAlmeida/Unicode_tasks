@@ -1,10 +1,13 @@
 const mongoose=require('mongoose')
-const Schema=mongoose.Schema
+//create a mongoose Schema
+const Schema=mongoose.Schema     
 
-const pairSchema=new Schema({
+const pairSchema=new Schema({   
     word: {  
         type:String , 
-        unique:true
+        unique:true ,    //adds unique words to the database
+        minlength: 2,
+        maxlength: 15,
         } ,
     meaning:{ 
         type:String 
@@ -13,4 +16,5 @@ const pairSchema=new Schema({
     antonym: { type:String }
 })
 
+//exports Pair model from the Schema
 module.exports=mongoose.model('Pair', pairSchema)
